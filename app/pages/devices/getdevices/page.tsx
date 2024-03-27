@@ -1,8 +1,12 @@
-import React from 'react'
+
 import FetchDevices from './getDevices'
 
 async function fetchDeviceList(){
-    const res = await fetch('http://localhost:3000/api/devices/listdevices')
+    const res = await fetch('http://localhost:3000/api/devices/listdevices',{
+      next:{
+        revalidate: 0
+      }
+    })
     return res.json()
 }
 
