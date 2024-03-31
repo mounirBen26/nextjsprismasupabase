@@ -24,7 +24,7 @@ export default  function FetchDevices({devices}:any) {
       .filter((device:any) => device.device.toLowerCase().includes(deviceTerm.toLowerCase()))
       .map((device:any)=>{
 
-      return <p key={device.id} className="text-sm font-bold mb-2 text-center hover:bg-blue-500 hover:text-white hover:scale-105 transition duration-100">{device.device} <span className='cursor-pointer bg-red-500 text-white px-2'><Link href={`/pages/devices/${device.id}`}>view</Link></span> </p> })}
+      return <p key={device.id} className="text-sm font-bold mb-2  hover:bg-blue-500 hover:text-white hover:scale-105 transition duration-100">{device.device} <span className='cursor-pointer bg-red-500 text-white px-2 rounded'><Link href={`/pages/devices/${device.id}`}>view</Link></span> </p> })}
       </section>
     
     </div>

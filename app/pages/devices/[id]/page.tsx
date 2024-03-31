@@ -12,12 +12,11 @@ export default async function page({params}:any) {
     const {id}= params
     const device = await getDeviceDetails(id)
   return (
-    <main>
+    <div className='flex flex-col justify-center items-center font-bold'>
       <h1>{device.device}</h1>
+
       <p>{device.createdAt}</p>
-
-
-    </main>
+    </div>
     
   )
 }
