@@ -13,7 +13,7 @@ async function fetchDeviceList(){
 export default async function page() {
   const deviceList:any = await fetchDeviceList()
   return (
-    <div className="flex items-center justify-center p-24">
+    <div className="flex items-center justify-center p-24 w-full">
       <FetchDevices devices={deviceList}/>
     </div>
   )
