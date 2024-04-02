@@ -3,12 +3,13 @@ import Link from 'next/link'
 
 export default function Navbar() {
   return (
-    <div className='flex justify-around font-bold text-md space-x-2 mx-3 my-3'>
+    <div className='flex justify-around text-md space-x-2 mx-3 my-3'>
       <h1>navbar</h1>
       <ul className='flex text-center flex-row space-x-2'>
-        <Link href='/'>Home</Link>
+        <Link href='/' className='hover:text-white hover:bg-blue-500 hover:rounded-md px-2 '>Home</Link>
         <li>User</li>
-        <Link href='/pages/devices'>Devices</Link>
+        <Link href='/pages/devices'
+         className='hover:text-white hover:bg-emerald-400 hover:rounded-md px-2'>Devices</Link>
       </ul>
     </div>
   )

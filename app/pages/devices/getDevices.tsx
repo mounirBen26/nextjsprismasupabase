@@ -6,10 +6,16 @@ import { useState, useEffect } from 'react'
 export default function FetchDevices({ devices }: any) {
   const [deviceTerm, setDeviceTerm] = useState('')
   const [deviceList, setDeviceList] = useState([])
-
   const filteredDevice = devices.filter((device:any)=>{
     return device.device.toLowerCase().includes(deviceTerm.toLowerCase())
   })
+  //navigation part
+  const itemsPerpage = 5
+  const totalPages = Math.round(filteredDevice / itemsPerpage)
+  const currentPage = 4
+  const lastIndex = itemsPerpage * currentPage
+  const startIndex =  lastIndex - itemsPerpage
+  console.log(startIndex,lastIndex)
 
   return (
     <div className='w-1/2'>
@@ -46,7 +52,11 @@ export default function FetchDevices({ devices }: any) {
             }</tbody>
       </table>
     </section>
-
+    <section className='text-red-500 text-center flex flex-row justify-center space-x-2 bg-gray-200'>
+      {Array.from({length:filteredDevice.length}).map((_,i)=>{
+        return <p className='cursor-pointer hover:bg-emerald-300 hover:text-white rounded-md p-1' key={i}>{i + 1}</p>
+      })}
+    </section>
     </div >
   )
 }
