@@ -6,16 +6,16 @@ import { useState, useEffect } from 'react'
 export default function FetchDevices({ devices }: any) {
   const [deviceTerm, setDeviceTerm] = useState('')
   const [deviceList, setDeviceList] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
   const filteredDevice = devices.filter((device:any)=>{
     return device.device.toLowerCase().includes(deviceTerm.toLowerCase())
   })
   //navigation part
-  const itemsPerpage = 5
-  const totalPages = Math.round(filteredDevice / itemsPerpage)
-  const currentPage = 4
+  const itemsPerpage = 3
+  const totalPages = Math.ceil(filteredDevice.length / itemsPerpage)
   const lastIndex = itemsPerpage * currentPage
   const startIndex =  lastIndex - itemsPerpage
-  console.log(startIndex,lastIndex)
+  console.log(startIndex,lastIndex,totalPages)
 
   return (
     <div className='w-1/2'>
@@ -38,7 +38,7 @@ export default function FetchDevices({ devices }: any) {
           </thead>
           <tbody>
           {filteredDevice.length > 0 ? 
-          (filteredDevice.map((device: any) => {
+          (filteredDevice.slice(startIndex, lastIndex).map((device: any) => {
             return <tr key={device.id} className='border'>
               <td className='p-1'>{device.id}</td>
               <td> {device.device}</td>
@@ -53,8 +53,10 @@ export default function FetchDevices({ devices }: any) {
       </table>
     </section>
     <section className='text-red-500 text-center flex flex-row justify-center space-x-2 bg-gray-200'>
-      {Array.from({length:filteredDevice.length}).map((_,i)=>{
-        return <p className='cursor-pointer hover:bg-emerald-300 hover:text-white rounded-md p-1' key={i}>{i + 1}</p>
+      {Array.from({length:totalPages}).map((_,i)=>{
+        return <p className={`cursor-pointer hover:bg-emerald-300 hover:text-white rounded-md p-1 ${currentPage === i+1? "bg-emerald-300 text-white":"bg-gray-200"}`}
+         key={i}
+         onClick={()=>{setCurrentPage(i+1)}}>{i + 1}</p>
       })}
     </section>
     </div >
