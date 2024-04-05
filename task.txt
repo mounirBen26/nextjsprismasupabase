@@ -1,0 +1,5 @@
+1. add display elements
+2. search bar with functionality
+3. navbar 
+4. pagination system
+5

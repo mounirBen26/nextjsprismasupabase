@@ -6,16 +6,26 @@ import { useState, useEffect } from 'react'
 export default function FetchDevices({ devices }: any) {
   const [deviceTerm, setDeviceTerm] = useState('')
   const [deviceList, setDeviceList] = useState([])
+  const [filteredDevice, setFilteredDevice] = useState(devices)
   const [currentPage, setCurrentPage] = useState(1)
-  const filteredDevice = devices.filter((device:any)=>{
-    return device.device.toLowerCase().includes(deviceTerm.toLowerCase())
-  })
+
+  useEffect(()=>{
+    setFilteredDevice( devices.filter((device:any)=>{
+      return device.device.toLowerCase().includes(deviceTerm.toLowerCase())
+    }))
+    console.log(filteredDevice)
+  },[deviceTerm,devices])
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [deviceTerm])
   //navigation part
-  const itemsPerpage = 3
+  
+  const itemsPerpage = 5
   const totalPages = Math.ceil(filteredDevice.length / itemsPerpage)
   const lastIndex = itemsPerpage * currentPage
   const startIndex =  lastIndex - itemsPerpage
   console.log(startIndex,lastIndex,totalPages)
+
 
   return (
     <div className='w-1/2'>
