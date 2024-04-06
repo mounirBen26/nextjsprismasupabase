@@ -2,6 +2,8 @@ import React from 'react'
 
 export default function NotFound() {
   return (
-    <div>Page Not Found 404</div>
+    <div className='h-screen flex items-center justify-center cursor-pointer bg-gray-500'>
+      <h1 className='text-xl'>404 | Page Not Found </h1>
+      </div>
   )
 }
