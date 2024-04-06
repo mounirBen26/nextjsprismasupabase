@@ -2,4 +2,4 @@
 2. search bar with functionality
 3. navbar 
 4. pagination system
-5
+5.register and logins
