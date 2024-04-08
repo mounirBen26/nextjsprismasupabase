@@ -1,7 +1,30 @@
 'use client'
-import React from 'react'
+import React , { useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+
 export default function Register() {
+    const [data, setData] = useState({
+        name:'',
+        email:'',
+        password:'',
+    })
+    const router = useRouter()
+    const registerUser = async (e:any) => {
+        e.preventDefault()
+        const res = await fetch('http://localhost:3000/api/register', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body:JSON.stringify({data})
+            })
+            // const resInfo = await res.json()
+            // console.log('----------------------->',resInfo)
+            
+            // router.push('/login')
+            
+    }
     return (
         <div>
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -13,7 +36,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form className="space-y-6" action="#" method="POST">
+                    <form className="space-y-6" action="#" method="POST" onSubmit={registerUser}>
                     <div>
                             <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
                                 Username
@@ -26,7 +49,8 @@ export default function Register() {
                                     autoComplete="name"
                                     required
                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                />
+                                    onChange={(e)=>setData({...data,name:e.target.value})}
+                                    />
                             </div>
                         </div>
 
@@ -42,6 +66,7 @@ export default function Register() {
                                     autoComplete="email"
                                     required
                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    onChange={(e)=>setData({...data,email:e.target.value})}
                                 />
                             </div>
                         </div>
@@ -60,6 +85,7 @@ export default function Register() {
                                     autoComplete="current-password"
                                     required
                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    onChange={(e)=>setData({...data,password:e.target.value})}
                                 />
                             </div>
                         </div>
@@ -69,7 +95,7 @@ export default function Register() {
                                 type="submit"
                                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             >
-                                Sign in
+                                Sign up
                             </button>
                         </div>
                     </form>
